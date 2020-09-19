@@ -36,6 +36,7 @@ def mkproject_rmd(name):
 
     template_path = os.path.dirname(__file__) + "/templates/rmd/template.rmd"
     os.system("cp " + template_path + " ./" + name + "/")
+    os.system("mv ./" + name + "/template.rmd" + " ./" + name + "/" + name + ".rmd")
 
 if __name__ == "__main__":
     args = sys.argv
