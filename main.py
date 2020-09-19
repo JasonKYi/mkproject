@@ -2,7 +2,7 @@ import os
 import sys
 
 
-def mkproject(lang, name):
+def mkproject_skeleton(lang, name):
 
     relative_path = os.path.dirname(__file__)
     gitignore_path = relative_path + "/templates/" + lang + ".gitignore"
@@ -31,7 +31,16 @@ def mkproject(lang, name):
         raise FileNotFoundError(
             lang + ".gitignore file not found, consider adding " + os.path.abspath(gitignore_path))
 
+def mkproject_rmd(name):
+    mkproject_skeleton("R", name)
+
+    template_path = os.path.dirname(__file__) + "/templates/rmd/template.rmd"
+    os.system("cp " + template_path + " ./" + name + "/")
 
 if __name__ == "__main__":
     args = sys.argv
-    mkproject(args[1], args[2])
+    
+    if args[1] == "rmd": 
+        mkproject_rmd(args[2])
+    else:
+        mkproject_skeleton(args[1], args[2])
